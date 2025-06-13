@@ -35,7 +35,7 @@ def gerar_cronograma(nicho, plataformas, dias=7):
 
     return pd.DataFrame(cronograma)
 
-st.write("Escolha o nicho (ex: moda, culinária):")
+st.text_input("Escolha o nicho (ex: moda, culinária):")
 nicho = input().strip().lower()
 st.write("Escolha as plataformas separadas por vírgula (instagram, tiktok, linkedin):")
 plataformas = [p.strip().lower() for p in input().split(',')]
