@@ -301,17 +301,17 @@ def main():
     """)
 
  with st.sidebar:
-        st.header("⚙️ Configurações")
+    st.header("⚙️ Configurações")
 
-        niche = st.selectbox(
-            "Seu nicho/área:",
-            ["Moda", "Culinária", "Dança", "Escrita", "Estudos", "Fitness", "Alimentação Saudável", "Empreendedorismo"]
-        )
-        platforms = st.multiselect(
-            "Plataformas:",
-            ["Instagram", "TikTok", "LinkedIn", "Youtube"],
-            default=["Instagram", "TikTok"]
-        )
+    niche = st.selectbox(
+        "Seu nicho/área:",
+        ["Moda", "Culinária", "Dança", "Escrita", "Estudos", "Fitness", "Alimentação Saudável", "Empreendedorismo"]
+    )
+    platforms = st.multiselect(
+        "Plataformas:",
+        ["Instagram", "TikTok", "LinkedIn", "Youtube"],
+        default=["Instagram", "TikTok"]
+    )
 
 
 st.write("Escolha o nicho")
