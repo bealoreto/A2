@@ -38,7 +38,7 @@ def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
           return [idea for idea in ideas if idea.strip()]
 
     except Exception as e:
-        print(f"Erro na geração de conteúdo: {e}")
+        st.write(f"Erro na geração de conteúdo: {e}")
         return [
             f"Conteúdo sobre {niche} para {objective}",
             f"Tutorial relacionado a {niche}",
@@ -368,22 +368,25 @@ def main():
 if __name__ == "__main__":
     main()
 
-print("Variáveis encontradas:")
-print([k for k in os.environ if "NGROK" in k])
-print("\nValor do NGROK_AUTH_TOKEN:")
-print(os.environ.get("NGROK_AUTH_TOKEN"))
+st.write("Variáveis encontradas:")
+st.write([k for k in os.environ if "NGROK" in k])
+st.write("\nValor do NGROK_AUTH_TOKEN:")
+st.write(os.environ.get("NGROK_AUTH_TOKEN"))
 
-from getpass import getpass
-os.environ["NGROK_AUTH_TOKEN"] = getpass("2z38ESxrYXjLLxo7FDOQmM1En4u_4S1veCicQy6shApYaDTgY: ")
+with st.sidebar:
+    ngrok_token = st.text_input("Digite seu NGROK_AUTH_TOKEN", type="password")
+    if ngrok_token:
+        os.environ["NGROK_AUTH_TOKEN"] = ngrok_token
+        ngrok.set_auth_token(ngrok_token)
 
 NGROK_AUTH_TOKEN = os.environ.get("NGROK_AUTH_TOKEN")
 if NGROK_AUTH_TOKEN:
     ngrok.set_auth_token(NGROK_AUTH_TOKEN)
 else:
-    print("NGROK_AUTH_TOKEN não encontrado. Defina-o manualmente antes desta célula.")
+    st.write("NGROK_AUTH_TOKEN não encontrado. Defina-o manualmente antes desta célula.")
   
 public_url = ngrok.connect(8501)
-print(f"\n✅ Acesse o aplicativo em: {public_url}\n")
+st.write(f"\n✅ Acesse o aplicativo em: {public_url}\n")
 
 !streamlit run /content/app.py --server.port 8501 &>/dev/null &
 
