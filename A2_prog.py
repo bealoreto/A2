@@ -4,7 +4,18 @@ import datetime
 import random
 import os
 from dotenv import load_dotenv
-from pyngrok import ngrok
+
+# Ativando ngrok 
+try:
+    from pyngrok import ngrok
+    load_dotenv()
+    auth_token = os.getenv("NGROK_AUTH_TOKEN")
+    if auth_token:
+        ngrok.set_auth_token(auth_token)
+        public_url = ngrok.connect(8501)
+        st.write(f"✅ Acesse o app via: {public_url}")
+except Exception as e:
+    st.warning(f"Ngrok não inicializado: {e}")
 
 load_dotenv()  
 
