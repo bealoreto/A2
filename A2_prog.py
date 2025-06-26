@@ -215,14 +215,14 @@ def main():
 
         frequency = st.slider(
             "Postagens por semana:",
-            1, 20, 7
+            1, 14, 7
         )
 
         start_date = st.date_input(
             "Data de início:",
             datetime.date.today()
         )
-        weeks = st.slider("Semanas de planejamento:", 1, 12, 4)
+        weeks = st.slider("Semanas de planejamento:", 1, 8, 4)
 
         with st.expander("Configurações avançadas"):
             creativity = st.slider("Criatividade da IA:", 0.5, 1.0, 0.8)
