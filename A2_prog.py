@@ -38,6 +38,8 @@ def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
         return [idea for idea in ideas if idea.strip()]
 
     except Exception as e:
+        st.error(f"Erro ao gerar conteúdo: {e}")
+        return []
         st.write(f"Erro na geração de conteúdo: {e}")
         return [
             f"Conteúdo sobre {niche} para {objective}",
