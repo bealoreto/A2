@@ -20,7 +20,7 @@ banco_ideias = {
 
 def gerar_cronograma(nicho, plataformas, dias=7):
     hoje = datetime.today()
-    cronograma = [1,7]
+    cronograma = []
 
     for i in range(dias):
         data = hoje + timedelta(days=i)
