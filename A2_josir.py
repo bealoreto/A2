@@ -1,4 +1,4 @@
-### Código não oficial (começamos o trabalho aqui mas o código está no prog.py)
+### Código Oficial
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
