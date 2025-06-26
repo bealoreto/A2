@@ -257,7 +257,19 @@ def gerar_cronograma(nicho, plataformas, dias=7):
                     'Plataforma': plataforma.capitalize(),
                     'Ideia de Conteúdo': ideia
                 })
-
+        if include_hashtags:
+            niche_hashtags = {
+                "Moda": ["Moda", "Estilo", "Tendências"],
+                "Beleza": ["Beleza", "Maquiagem", "Skincare"],
+                "Tecnologia": ["Tech", "Inovação", "Tecnologia"],
+                "Gastronomia": ["Comida", "Receita", "Chef"],
+                "Fitness": ["Fitness", "Treino", "Saúde"],
+                "Educação": ["Educação", "Aprendizado", "Conhecimento"]
+            }
+          
+            schedule["Hashtags"] = schedule["Plataforma"].apply(
+                lambda p: "#" + p + " " + " ".join(["#" + h for h in niche_hashtags.get(niche, ["Conteúdo"])])
+            )
     return pd.DataFrame(cronograma)
 
 st.write("Escolha o nicho")
