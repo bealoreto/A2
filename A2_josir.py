@@ -331,22 +331,22 @@ def gerar_cronograma(nicho, plataformas, dias=7):
     
     return pd.DataFrame(cronograma)
     start_date = datetime.today()
-        pdf_data = generate_pdf(
-            schedule=df.rename(columns={
-                'Ideia de Conteúdo': 'Tópico',
-                'Plataforma': 'Plataforma',
-                'Data': 'Data'
-            }),
-            niche=nicho.capitalize(),
-            objective="Aumentar engajamento",
-            start_date=start_date
-        )
-        st.download_button(
-            label="📄 Baixar como PDF",
-            data=pdf_data,
-            file_name="cronograma_conteudo.pdf",
-            mime="application/pdf"
-        )
+    pdf_data = generate_pdf(
+        schedule=df.rename(columns={
+            'Ideia de Conteúdo': 'Tópico',
+            'Plataforma': 'Plataforma',
+            'Data': 'Data'
+        }),
+        niche=nicho.capitalize(),
+        objective="Aumentar engajamento",
+        start_date=start_date
+    )
+    st.download_button(
+        label="📄 Baixar como PDF",
+        data=pdf_data,
+        file_name="cronograma_conteudo.pdf",
+        mime="application/pdf"
+    )
 
 def generate_pdf(schedule, nicho, objective, start_date):
     """Gera PDF do cronograma"""
