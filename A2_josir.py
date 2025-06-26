@@ -300,6 +300,20 @@ def main():
     **Crie cronogramas de conteúdo perfeitos para suas redes sociais**
     """)
 
+ with st.sidebar:
+        st.header("⚙️ Configurações")
+
+        niche = st.selectbox(
+            "Seu nicho/área:",
+            ["Moda", "Culinária", "Dança", "Escrita", "Estudos", "Fitness", "Alimentação Saudável", "Empreendedorismo"]
+        )
+        platforms = st.multiselect(
+            "Plataformas:",
+            ["Instagram", "TikTok", "LinkedIn", "Twitter", "Facebook"],
+            default=["Instagram", "TikTok"]
+        )
+
+
 st.write("Escolha o nicho")
 nicho = st.text_input(' (ex: moda, culinária): ').strip().lower()
 st.write("Escolha as plataformas separadas por vírgula (instagram, tiktok, linkedin):")
