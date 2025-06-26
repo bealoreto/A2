@@ -16,7 +16,7 @@ def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     model = genai.GenerativeModel('gemini-pro')
     prompt = f"""
-    Você é um especialista em marketing digital. Gere {num_ideas} ideias de conteúdo
+    Você é um especialista em marketing digital. Gere 5 ideias de conteúdo
     criativas para o nicho de {niche} com foco em {objective}.
   
     As ideias devem ser:
