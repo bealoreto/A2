@@ -33,8 +33,8 @@ def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
               prompt,
               generation_config={"temperature": creativity, "max_output_tokens": 2000}
           )
-          ideas = response.text.strip().split('\n')
-          return [idea for idea in ideas if idea.strip()]
+        ideas = response.text.strip().split('\n')
+        return [idea for idea in ideas if idea.strip()]
 
     except Exception as e:
         st.write(f"Erro na geração de conteúdo: {e}")
@@ -55,7 +55,7 @@ def generate_content_plan(start_date, weeks, frequency, platforms, ideas, niche,
               day_offset = random.randint(0, 6)
               post_date = current_date + datetime.timedelta(days=day_offset)
               dates.append(post_date)
-          current_date += datetime.timedelta(weeks=1)
+        current_date += datetime.timedelta(weeks=1)
     dates.sort()
     schedule = pd.DataFrame({
         "Data": dates,
@@ -251,6 +251,7 @@ def main():
                 frequency,
                 platforms,
                 content_ideas,
+                niche,
                 include_hashtags,
                 include_times
             )
@@ -307,18 +308,6 @@ def main():
                 "end": row['Data'].strftime("%Y-%m-%dT%H:%M:%S"),
                 "color": "#FF4B4B" if "Instagram" in row['Plataforma'] else "#1A73E8"
             })
-
-       #( st.calendar(
-            events=events,
-            options=calendar_options,
-            custom_css="""
-                .fc-event {
-                    cursor: pointer;
-                    font-size: 0.8em;
-                    padding: 2px 5px;
-                }
-            """
-        ))
 
         st.divider()
         st.subheader("📤 Exportar Cronograma")
