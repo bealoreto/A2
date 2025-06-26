@@ -358,22 +358,5 @@ if __name__ == "__main__":
     main()
 
 st.write("Variáveis encontradas:")
-st.write([k for k in os.environ if "NGROK" in k])
-st.write("\nValor do NGROK_AUTH_TOKEN:")
-st.write(os.environ.get("NGROK_AUTH_TOKEN"))
-
-with st.sidebar:
-    ngrok_token = st.text_input("Digite seu NGROK_AUTH_TOKEN", type="password")
-    if ngrok_token:
-        os.environ["NGROK_AUTH_TOKEN"] = ngrok_token
-        ngrok.set_auth_token(ngrok_token)
-
-NGROK_AUTH_TOKEN = os.environ.get("NGROK_AUTH_TOKEN")
-if NGROK_AUTH_TOKEN:
-    ngrok.set_auth_token(NGROK_AUTH_TOKEN)
-else:
-    st.write("NGROK_AUTH_TOKEN não encontrado. Defina-o manualmente antes desta célula.")
-  
-public_url = ngrok.connect(8501)
 st.write(f"\n✅ Acesse o aplicativo em: {public_url}\n")
 
