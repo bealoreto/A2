@@ -170,7 +170,7 @@ def estimate_engagement(niche, platforms, frequency, weeks):
     }
 
 def main():
-   st.set_page_config(
+    st.set_page_config(
         page_title="Social Content Planner",
         page_icon="📅",
         layout="wide",
