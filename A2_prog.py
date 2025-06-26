@@ -357,5 +357,4 @@ if __name__ == "__main__":
     main()
 
 st.write("Variáveis encontradas:")
-st.write(f"\n✅ Acesse o aplicativo em: {public_url}\n")
 
