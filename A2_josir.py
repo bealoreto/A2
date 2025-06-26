@@ -309,7 +309,7 @@ def main():
         )
         platforms = st.multiselect(
             "Plataformas:",
-            ["Instagram", "TikTok", "LinkedIn", "Twitter", "Facebook"],
+            ["Instagram", "TikTok", "LinkedIn", "Youtube"],
             default=["Instagram", "TikTok"]
         )
 
