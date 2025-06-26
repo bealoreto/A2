@@ -287,6 +287,19 @@ def generate_pdf(schedule, niche, objective, start_date):
 
     return pdf.output(dest="S").encode("latin1")
 
+def main():
+    st.set_page_config(
+        page_title="Social Content Planner",
+        page_icon="📅",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+
+    st.title("📅 Social Content Planner - IA")
+    st.markdown("""
+    **Crie cronogramas de conteúdo perfeitos para suas redes sociais**
+    """)
+
 st.write("Escolha o nicho")
 nicho = st.text_input(' (ex: moda, culinária): ').strip().lower()
 st.write("Escolha as plataformas separadas por vírgula (instagram, tiktok, linkedin):")
