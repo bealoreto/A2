@@ -1,9 +1,8 @@
 ### Código não oficial (começamos o trabalho aqui mas o código está no prog.py)
 import streamlit as st
 import pandas as pd
-import requests
 from datetime import datetime, timedelta
-
+from fpdf import FPDF
 
 banco_ideias = {
     'moda': {
@@ -291,61 +290,44 @@ def main():
     st.set_page_config(
         page_title="Social Content Planner",
         page_icon="📅",
-        layout="wide",
-        initial_sidebar_state="expanded"
+        layout="wide"
     )
 
     st.title("📅 Social Content Planner - IA")
-    st.markdown("""
-    **Crie cronogramas de conteúdo perfeitos para suas redes sociais**
-    """)
+    st.markdown("**Crie cronogramas de conteúdo perfeitos para suas redes sociais**")
 
+    # Configurações na barra lateral
     with st.sidebar:
         st.header("⚙️ Configurações")
-    
-        niche = st.selectbox(
-            "Seu nicho/área:",
-            ["Moda", "Culinária", "Dança", "Escrita", "Estudos", "Fitness", "Alimentação Saudável", "Empreendedorismo"]
+        nicho = st.selectbox(
+            "Escolha seu nicho:",
+            list(banco_ideias.keys()),
+            format_func=lambda x: x.capitalize()
         )
-        platforms = st.multiselect(
-            "Plataformas:",
-            ["Instagram", "TikTok", "LinkedIn", "Youtube"],
-            default=["Instagram", "TikTok"]
+        plataformas = st.multiselect(
+            "Selecione as plataformas:",
+            ["instagram", "tiktok", "linkedin"],
+            default=["instagram", "tiktok"]
+        )
+        dias = st.slider("Dias de cronograma", 1, 30, 7)
+
+        gerar = st.button("Gerar Cronograma")
+
+    # Resultado
+    if gerar:
+        df = gerar_cronograma(nicho, plataformas, dias)
+        st.subheader("🔹 Cronograma de Conteúdo")
+        st.dataframe(df)
+
+        # Exportar CSV
+        csv = df.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="📥 Baixar como CSV",
+            data=csv,
+            file_name="cronograma_conteudo.csv",
+            mime='text/csv'
         )
 
-generate_button = st.button("Gerar Cronograma", type="primary")
-
-    st.sidebar.divider()
-    with st.sidebar.expander("💡 Banco de Ideias"):
-        if st.button("Carregar ideias salvas"):
-            saved_ideas = load_ideas()
-            if saved_ideas:
-                st.session_state.ideas = saved_ideas
-                st.success("Ideias carregadas com sucesso!")
-            else:
-                st.warning("Nenhum arquivo de ideias encontrado")
-
-        if st.button("Salvar ideias atuais"):
-            if 'ideas' in st.session_state:
-                save_ideas(st.session_state.ideas)
-                st.success("Ideias salvas com sucesso!")
-            else:
-                st.error("Nenhuma ideia para salvar")
-
-    if generate_button:
-        with st.spinner("Gerando cronograma..."):
-            content_ideas = get_content_ideas(
-                niche,
-                creativity
-            )
-            st.write("Ideias geradas:", content_ideas) 
-
-st.write("Escolha o nicho")
-nicho = st.text_input(' (ex: moda, culinária): ').strip().lower()
-st.write("Escolha as plataformas separadas por vírgula (instagram, tiktok, linkedin):")
-plataformas = st.text_input(' (instagram, tiktok, linkedin): ')
-if plataformas:
-    plataformas=[p.strip().lower() for p in plataformas.split(',')]
-    df_cronograma = gerar_cronograma(nicho, plataformas, dias=7)
-    st.write("\n🔹 Cronograma de Conteúdo (7 dias):")
-    st.write(df_cronograma)
+# Executa a função principal
+if __name__ == "__main__":
+    main()
