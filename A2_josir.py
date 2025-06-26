@@ -260,6 +260,33 @@ def gerar_cronograma(nicho, plataformas, dias=7):
     
     return pd.DataFrame(cronograma)
 
+def generate_pdf(schedule, niche, objective, start_date):
+    """Gera PDF do cronograma"""
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", "B", 16)
+    pdf.cell(0, 10, f"Cronograma de Conteúdo - {niche}", 0, 1, "C")
+    pdf.set_font("Arial", "", 12)
+    pdf.cell(0, 10, f"Objetivo: {objective}", 0, 1)
+    pdf.cell(0, 10, f"Data de início: {start_date.strftime('%d/%m/%Y')}", 0, 1)
+    pdf.ln(10)
+    pdf.set_font("Arial", "B", 12)
+    col_widths = [30, 30, 60, 30, 40]
+    headers = ["Data", "Plataforma", "Tópico", "Formato", "Horario"]
+    for i, header in enumerate(headers):
+        pdf.cell(col_widths[i], 10, header, 1)
+    pdf.ln()
+    pdf.set_font("Arial", "", 10)
+    for _, row in schedule.iterrows():
+        pdf.cell(col_widths[0], 10, row["Data"].strftime("%d/%m"), 1)
+        pdf.cell(col_widths[1], 10, row["Plataforma"], 1)
+        pdf.cell(col_widths[2], 10, row["Tópico"], 1)
+        pdf.cell(col_widths[3], 10, row["Formato"], 1)
+        pdf.cell(col_widths[4], 10, row.get("Horário Sugerido", ""), 1)
+        pdf.ln()
+
+    return pdf.output(dest="S").encode("latin1")
+
 st.write("Escolha o nicho")
 nicho = st.text_input(' (ex: moda, culinária): ').strip().lower()
 st.write("Escolha as plataformas separadas por vírgula (instagram, tiktok, linkedin):")
