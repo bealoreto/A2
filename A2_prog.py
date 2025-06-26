@@ -4,7 +4,6 @@ import datetime
 import random
 import os
 from dotenv import load_dotenv
-from pyngrok import ngrok
 
 load_dotenv()  
 
