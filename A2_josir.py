@@ -300,7 +300,7 @@ def main():
     **Crie cronogramas de conteúdo perfeitos para suas redes sociais**
     """)
 
-     with st.sidebar:
+    with st.sidebar:
         st.header("⚙️ Configurações")
     
         niche = st.selectbox(
