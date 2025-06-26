@@ -1,3 +1,4 @@
+###CODIGO NÃO OFICIAL - tentamos colocar IA, mas deu erro...
 import streamlit as st
 import pandas as pd
 import datetime
