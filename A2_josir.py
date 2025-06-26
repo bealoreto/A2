@@ -32,6 +32,15 @@ banco_ideias = {
             'Análise de tendências e impacto no varejo',
             'Dicas para empreender com moda',
             'Moda e ESG: como integrar propósito'
+        ],
+        'youtube': [
+            'Lookbook completo da estação',
+            'Dicas de compras inteligentes',
+            'Tutorial de customização de roupas',
+            'Vlog de evento de moda',
+            'Entrevista com estilista famoso',
+            'Análise de tendências do mercado',
+            'Como montar um guarda-roupa cápsula'
         ]
     },
     'culinária': {
@@ -61,6 +70,15 @@ banco_ideias = {
             'Culinária e saúde no trabalho',
             'Criando cursos ou eBooks de receitas',
             'Como usar conteúdo culinário como portfólio'
+        ],
+        'youtube': [
+            'Receitas detalhadas passo a passo',
+            'Vídeos de técnicas culinárias',
+            'Tour pela cozinha profissional',
+            'Desafios de culinária com convidados',
+            'Análise de tendências gastronômicas',
+            'Entrevistas com chefs renomados',
+            'Como montar cardápios saudáveis'
         ]
     },
     'dança': {
@@ -90,6 +108,15 @@ banco_ideias = {
             'Dança e saúde mental no trabalho',
             'Criando comunidade com alunos no digital',
             'Monetização e parcerias no nicho de dança'
+        ],
+        'youtube': [
+            'Aulas completas de dança para iniciantes',
+            'Coreografias detalhadas por ritmo',
+            'Vlogs de eventos e workshops',
+            'Entrevistas com profissionais da dança',
+            'Dicas para melhorar técnica',
+            'Rotinas de treino para dança fitness',
+            'História dos estilos de dança'
         ]
     },
     'escrita': {
@@ -119,6 +146,15 @@ banco_ideias = {
             'Escrever e vender eBooks',
             'Escrita criativa aplicada ao marketing',
             'Redes sociais para escritores'
+        ],
+        'youtube': [
+            'Workshops de escrita criativa',
+            'Análise de obras literárias',
+            'Dicas para autores independentes',
+            'Escrita ao vivo e exercícios práticos',
+            'Entrevistas com escritores',
+            'Como publicar seu livro',
+            'Storytelling para marketing'
         ]
     },
     'estudos': {
@@ -148,6 +184,15 @@ banco_ideias = {
             'Técnicas de produtividade aplicadas ao trabalho',
             'Gestão de tempo para estudantes',
             'Estudar enquanto trabalha: é possível?'
+        ],
+        'youtube': [
+            'Aulas online para reforço escolar',
+            'Técnicas de estudo detalhadas',
+            'Planos de estudo para concursos',
+            'Dicas para organização do tempo',
+            'Vídeos motivacionais para estudantes',
+            'Como usar apps de estudo',
+            'Entrevistas com especialistas em educação'
         ]
     },
     'fitness': {
@@ -177,6 +222,15 @@ banco_ideias = {
             'Tendências do mercado fitness digital',
             'Estudo de caso: marca fitness de sucesso',
             'Dicas para balancear trabalho e treino'
+        ],
+        'youtube': [
+            'Treinos completos para casa',
+            'Dicas de exercícios para iniciantes',
+            'Rotinas de alongamento e mobilidade',
+            'Vídeos motivacionais de transformação',
+            'Nutrição para atletas amadores',
+            'Técnicas de treino HIIT',
+            'Entrevistas com personal trainers'
         ]
     },
     'alimentação saudável': {
@@ -206,6 +260,15 @@ banco_ideias = {
             'Parcerias entre marcas e influenciadores',
             'Estratégias para vender produtos naturais',
             'Alimentação saudável e produtividade'
+        ],
+        'youtube': [
+            'Receitas saudáveis passo a passo',
+            'Explicações sobre superalimentos',
+            'Desafios de alimentação saudável',
+            'Vlogs de mercado orgânico',
+            'Entrevistas com nutricionistas',
+            'Planejamento de refeições semanais',
+            'Como ler rótulos de alimentos'
         ]
     },
     'empreendedorismo': {
@@ -235,6 +298,15 @@ banco_ideias = {
             'Financiamento e captação de recursos',
             'Estudos de caso de startups',
             'Usar LinkedIn para negócios B2B'
+        ],
+        'youtube': [
+            'Como começar um negócio do zero',
+            'Estratégias de marketing para startups',
+            'Entrevistas com empreendedores de sucesso',
+            'Dicas para gestão financeira pessoal',
+            'Como criar um pitch vencedor',
+            'Ferramentas essenciais para empreendedores',
+            'Erros comuns e como evitá-los'
         ]
     }
 }
@@ -258,6 +330,23 @@ def gerar_cronograma(nicho, plataformas, dias=7):
                 })
     
     return pd.DataFrame(cronograma)
+    start_date = datetime.today()
+        pdf_data = generate_pdf(
+            schedule=df.rename(columns={
+                'Ideia de Conteúdo': 'Tópico',
+                'Plataforma': 'Plataforma',
+                'Data': 'Data'
+            }),
+            niche=nicho.capitalize(),
+            objective="Aumentar engajamento",
+            start_date=start_date
+        )
+        st.download_button(
+            label="📄 Baixar como PDF",
+            data=pdf_data,
+            file_name="cronograma_conteudo.pdf",
+            mime="application/pdf"
+        )
 
 def generate_pdf(schedule, nicho, objective, start_date):
     """Gera PDF do cronograma"""
