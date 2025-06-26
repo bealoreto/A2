@@ -248,7 +248,7 @@ def gerar_cronograma(nicho, plataformas, dias=7):
         dia = data.strftime('%d/%m/%Y')
 
         for plataforma in plataformas:
-            ideias = banco_ideias.get(niche, {}).get(plataforma, [])
+            ideias = banco_ideias.get(nicho, {}).get(plataforma, [])
             if ideias:
                 ideia = ideias[i % len(ideias)]  # alterna as ideias
                 cronograma.append({
@@ -259,7 +259,7 @@ def gerar_cronograma(nicho, plataformas, dias=7):
     
     return pd.DataFrame(cronograma)
 
-def generate_pdf(schedule, niche, objective, start_date):
+def generate_pdf(schedule, nicho, objective, start_date):
     """Gera PDF do cronograma"""
     pdf = FPDF()
     pdf.add_page()
