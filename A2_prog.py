@@ -39,7 +39,6 @@ def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
 
     except Exception as e:
         st.error(f"Erro ao gerar conteúdo: {e}")
-        return []
         st.write(f"Erro na geração de conteúdo: {e}")
         return [
             f"Conteúdo sobre {niche} para {objective}",
@@ -244,7 +243,7 @@ def main():
             content_ideas = get_content_ideas(
                 niche,
                 objective,
-                5,
+                frequency * weeks,
                 creativity
             )
             st.write("Ideias geradas:", content_ideas) 
