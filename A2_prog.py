@@ -33,7 +33,6 @@ def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
               prompt,
               generation_config={"temperature": creativity, "max_output_tokens": 2000}
           )
-      
           ideas = response.text.strip().split('\n')
           return [idea for idea in ideas if idea.strip()]
 
@@ -47,7 +46,7 @@ def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
             f"Como melhorar seu desempenho em {niche}"
         ][:num_ideas]  
       
-def generate_content_plan(start_date, weeks, frequency, platforms, ideas, include_hashtags=True, include_times=True):
+def generate_content_plan(start_date, weeks, frequency, platforms, ideas, niche, include_hashtags=True, include_times=True):
     dates = []
     current_date = start_date
   
@@ -309,7 +308,7 @@ def main():
                 "color": "#FF4B4B" if "Instagram" in row['Plataforma'] else "#1A73E8"
             })
 
-        st.calendar(
+       #( st.calendar(
             events=events,
             options=calendar_options,
             custom_css="""
@@ -319,7 +318,7 @@ def main():
                     padding: 2px 5px;
                 }
             """
-        )
+        ))
 
         st.divider()
         st.subheader("📤 Exportar Cronograma")
@@ -388,5 +387,7 @@ else:
 public_url = ngrok.connect(8501)
 st.write(f"\n✅ Acesse o aplicativo em: {public_url}\n")
 
-!streamlit run /content/app.py --server.port 8501 &>/dev/null &
+pip install -r requirements.txt
+streamlit run A2_prog.py
+
 
