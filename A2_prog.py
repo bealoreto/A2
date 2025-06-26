@@ -377,7 +377,3 @@ else:
 public_url = ngrok.connect(8501)
 st.write(f"\n✅ Acesse o aplicativo em: {public_url}\n")
 
-pip install -r requirements.txt
-streamlit run A2_prog.py
-
-
