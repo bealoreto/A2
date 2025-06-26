@@ -244,7 +244,7 @@ def main():
             content_ideas = get_content_ideas(
                 niche,
                 objective,
-                frequency * weeks,
+                5,
                 creativity
             )
 
