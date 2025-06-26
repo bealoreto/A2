@@ -398,7 +398,7 @@ def main():
             ["instagram", "tiktok", "linkedin"],
             default=["instagram", "tiktok"]
         )
-        dias = st.slider("Dias de cronograma", 1, 30, 7)
+        dias = st.slider("Dias de cronograma", 1, 31, 7)
 
         gerar = st.button("Gerar Cronograma")
 
