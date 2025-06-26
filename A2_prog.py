@@ -29,12 +29,13 @@ def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
     """
   
     try:
-       response = model.generate_content(
-              prompt,
-              generation_config={"temperature": creativity, "max_output_tokens": 2000}
-          )
-        ideas = response.text.strip().split('\n')
-        return [idea for idea in ideas if idea.strip()]
+    response = model.generate_content(
+        prompt,
+        generation_config={"temperature": creativity, "max_output_tokens": 2000}
+    )
+
+    ideas = response.text.strip().split('\n')
+    return [idea for idea in ideas if idea.strip()]
 
     except Exception as e:
         st.write(f"Erro na geração de conteúdo: {e}")
