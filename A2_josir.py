@@ -249,7 +249,7 @@ def gerar_cronograma(nicho, plataformas, dias=7):
         dia = data.strftime('%d/%m/%Y')
 
         for plataforma in plataformas:
-            ideias = banco_ideias.get(nicho, {}).get(plataforma, [])
+            ideias = banco_ideias.get(niche, {}).get(plataforma, [])
             if ideias:
                 ideia = ideias[i % len(ideias)]  # alterna as ideias
                 cronograma.append({
@@ -313,6 +313,32 @@ def main():
             default=["Instagram", "TikTok"]
         )
 
+generate_button = st.button("Gerar Cronograma", type="primary")
+
+    st.sidebar.divider()
+    with st.sidebar.expander("💡 Banco de Ideias"):
+        if st.button("Carregar ideias salvas"):
+            saved_ideas = load_ideas()
+            if saved_ideas:
+                st.session_state.ideas = saved_ideas
+                st.success("Ideias carregadas com sucesso!")
+            else:
+                st.warning("Nenhum arquivo de ideias encontrado")
+
+        if st.button("Salvar ideias atuais"):
+            if 'ideas' in st.session_state:
+                save_ideas(st.session_state.ideas)
+                st.success("Ideias salvas com sucesso!")
+            else:
+                st.error("Nenhuma ideia para salvar")
+
+    if generate_button:
+        with st.spinner("Gerando cronograma..."):
+            content_ideas = get_content_ideas(
+                niche,
+                creativity
+            )
+            st.write("Ideias geradas:", content_ideas) 
 
 st.write("Escolha o nicho")
 nicho = st.text_input(' (ex: moda, culinária): ').strip().lower()
