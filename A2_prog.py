@@ -12,7 +12,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 import google.generativeai as genai
 
-def get_content_ideas(niche, objective, 5, creativity=0.8):
+def get_content_ideas(niche, objective, num_ideas, creativity=0.8):
     st.write("Ideias geradas:", content_ideas)
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     model = genai.GenerativeModel('gemini-pro')
